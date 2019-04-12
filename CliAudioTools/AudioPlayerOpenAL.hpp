@@ -1,5 +1,5 @@
-#ifndef AudioOut_hpp
-#define AudioOut_hpp
+#ifndef AudioPlayerOpenAL_hpp
+#define AudioPlayerOpenAL_hpp
 //==============================================================================
 #include <stdio.h>
 #include "AudioWavFileReadWrite.hpp"
@@ -15,18 +15,14 @@
 #include <OpenAL/OpenAL.h>
 //==============================================================================
 
-class AudioOut
+class AudioPlayerOpenAL
 {
 public:
-    AudioOut();
-    ~AudioOut();
+    AudioPlayerOpenAL();
+    ~AudioPlayerOpenAL();
     //==========================================================================
     /**
      Send list of available audio devices to stdout
-     
-     @param devices Device specifier
-     
-     list_audio_devices(alcGetString(NULL, ALC_DEVICE_SPECIFIER));
      */
     static void listAudioDevices();
     //==========================================================================
@@ -48,4 +44,4 @@ private:
     
 };
 
-#endif /* AudioOut_hpp */
+#endif /* AudioPlayerOpenAL_hpp */

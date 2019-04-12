@@ -11,12 +11,12 @@
 
 int main(int argc, const char * argv[])
 {
-    const char *filename = "/Users/mhamilt7/Music/WavFiles/Godin6.wav";
+    const char *wavFileName = "path/to/file.wav";
     
-    AudioOut ap;
-    ap.playFile(filename);
+    AudioPlayerOpenAL ap;
+    ap.playFile(wavFileName);
     
     AudioPlayerOsX apOsX;
-    apOsX.playFile(filename);
+    apOsX.playFile(wavFileName);
     return 0;
 }

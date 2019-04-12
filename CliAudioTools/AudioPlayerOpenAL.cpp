@@ -1,19 +1,19 @@
 //==============================================================================
-#include "AudioOut.hpp"
+#include "AudioPlayerOpenAL.hpp"
 //==============================================================================
 
-AudioOut::AudioOut()
+AudioPlayerOpenAL::AudioPlayerOpenAL()
 {
     
 }
 
-AudioOut::~AudioOut()
+AudioPlayerOpenAL::~AudioPlayerOpenAL()
 {
     
 }
 //==============================================================================
 
-void AudioOut::listAudioDevices()
+void AudioPlayerOpenAL::listAudioDevices()
 {
     const ALCchar *device = alcGetString(nullptr, ALC_DEVICE_SPECIFIER);
     const ALCchar *next = device + 1;
@@ -33,7 +33,7 @@ void AudioOut::listAudioDevices()
 
 //==============================================================================
 
-void AudioOut::playFile(const char *inputfname)
+void AudioPlayerOpenAL::playFile(const char *inputfname)
 {
     ALboolean enumeration = alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT");
     if (enumeration == AL_FALSE)
@@ -104,13 +104,13 @@ void AudioOut::playFile(const char *inputfname)
     alcCloseDevice(device);
 }
 
-void AudioOut::printMidiHeader(const char *filename)
+void AudioPlayerOpenAL::printMidiHeader(const char *filename)
 {
     
 }
 //==============================================================================
 
-void AudioOut::testError(const char *message)
+void AudioPlayerOpenAL::testError(const char *message)
 {
     ALCenum error = alGetError();
     if (error != AL_NO_ERROR)
@@ -119,7 +119,7 @@ void AudioOut::testError(const char *message)
     }
 }
 
-ALenum AudioOut::getAlFormat()
+ALenum AudioPlayerOpenAL::getAlFormat()
 {
     short channels = wavReadWrite.getFileChannelNumber();
     short samples = wavReadWrite.getFileBitDepth();
