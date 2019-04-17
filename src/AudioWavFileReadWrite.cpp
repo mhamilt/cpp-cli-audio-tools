@@ -109,10 +109,11 @@ double* AudioWavFileReadWrite::readWav(const char *filename, int *sampsPerChan, 
     }
     
     const int totalSamples = wavReadFileHeader.subChunk2Size * 8 /(wavReadFileHeader.bitsPerSample);
-    *sampsPerChan = totalSamples/(wavReadFileHeader.numChannels);
+    *sampsPerChan = totalSamples / (wavReadFileHeader.numChannels);
     printf("Length: %d\tSamples: %d \n",totalSamples,*sampsPerChan);
     
     double *data = new double[*sampsPerChan];
+    
     parseWavMonoFile(data, f);
     fclose(f);
     printf("%d samples read from %s\n",*sampsPerChan,filename);

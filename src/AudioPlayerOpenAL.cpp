@@ -32,9 +32,13 @@ void AudioPlayerOpenAL::listAudioDevices()
 }
 
 //==============================================================================
-
-void AudioPlayerOpenAL::playFile(const char *inputfname)
+void AudioPlayerOpenAL::playAudio(ALvoid *data,
+                                  uint8_t channelCount,
+                                  ALsizei numberOfBytes,
+                                  ALsizei samplingRate,
+                                  uint8_t bitDepth)
 {
+    
     ALboolean enumeration = alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT");
     if (enumeration == AL_FALSE)
         fprintf(stderr, "enumeration extension not available\n");
@@ -69,15 +73,12 @@ void AudioPlayerOpenAL::playFile(const char *inputfname)
     alGenBuffers(1, &buffer);
     testError("buffer generation");
     
-    ALsizei numberOfBytes, samplingRate;
-    ALvoid *data = wavReadWrite.readRawData(inputfname, &numberOfBytes, &samplingRate);
-    
     if (!data)
     {
         std::cout << "LOAD ERROR: check the file name is correct" << '\n';
     }
     
-    alBufferData(buffer, getAlFormat(), data, numberOfBytes, samplingRate);
+    alBufferData(buffer, getAlFormat(channelCount,bitDepth), data, numberOfBytes, samplingRate);
     testError("Fail at alBufferData");
     
     alSourcei(source, AL_BUFFER, buffer);
@@ -103,7 +104,49 @@ void AudioPlayerOpenAL::playFile(const char *inputfname)
     alcDestroyContext(context);
     alcCloseDevice(device);
 }
+//==============================================================================
+void AudioPlayerOpenAL::playFile(const char *inputfname)
+{
+    ALsizei numberOfBytes, samplingRate;
+    ALvoid *data = wavReadWrite.readRawData(inputfname, &numberOfBytes, &samplingRate);
+    playAudio(data, wavReadWrite.getFileChannelNumber(), numberOfBytes, samplingRate, wavReadWrite.getFileBitDepth());
+}
+//==============================================================================
+void AudioPlayerOpenAL::playAudioData(float *audioData,
+                                      unsigned int numSamples,
+                                      uint8_t channelCount,
+                                      unsigned int samplingRate,
+                                      uint8_t bitDepth)
+{
+    const uint8_t bytesPerSample = bitDepth / 8;
+    const unsigned int numberOfBytes = numSamples * channelCount * bytesPerSample;
+//    uint8_t *audioDataConversion = new uint8_t[numberOfBytes];
+    char *audioDataConversion = new char[numberOfBytes];
+    const float maxValue = pow(2., bitDepth - 1);
+    
+    
+    const float radPerSec = 440.f * 2.f * 3.1415926536f / 44100.f;
+    
+    for (int i = 0; i < numberOfBytes; ++i)
+    {
+        audioDataConversion[i] = audioFloat2Byte(audioData[i/bytesPerSample],
+                                                 maxValue,
+                                                 (i % bytesPerSample));
+//        audioDataConversion[i] = audioFloat2Byte(sin(float(i/bytesPerSample) * radPerSec),
+//                                                 maxValue,
+//                                                 (i % bytesPerSample));
+    }
+    
+    playAudio(audioDataConversion, channelCount, numberOfBytes, samplingRate, bitDepth);
+}
 
+uint8_t AudioPlayerOpenAL::audioFloat2Byte(float val, float maxValue, uint8_t byteNum)
+{
+    uint8_t bitShift = byteNum * 8;
+    uint8_t byteVal = (uint32_t((val + 1.) * 0.5 * maxValue) >> bitShift);
+    return byteVal;
+}
+//==============================================================================
 void AudioPlayerOpenAL::printMidiHeader(const char *filename)
 {
     
@@ -119,13 +162,12 @@ void AudioPlayerOpenAL::testError(const char *message)
     }
 }
 
-ALenum AudioPlayerOpenAL::getAlFormat()
+
+ALenum AudioPlayerOpenAL::getAlFormat(uint8_t channelCount, uint8_t bitDepth)
 {
-    short channels = wavReadWrite.getFileChannelNumber();
-    short samples = wavReadWrite.getFileBitDepth();
-    bool stereo = (channels > 1);
+    bool stereo = (channelCount > 1);
     
-    switch (samples)
+    switch (bitDepth)
     {
         case 16:
             if (stereo)

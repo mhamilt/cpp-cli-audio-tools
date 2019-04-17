@@ -148,22 +148,25 @@ public:
     double** whiteNoise(int sampsPerChan, int sampleRate);
     
     /**
-     <#Description#>
+     raw byte data from given file
 
-     @return <#return value description#>
+     @param filename wav filename
+     @param sampsPerChan integer whose value will be changed to number of samples per channel of filename
+     @param sampleRate integer whose value will be changed to sample rate of filename
+     @return return byte array
      */
     char* readRawData(const char *filename, int *sampsPerChan, int *sampleRate);
     //==========================================================================
     /**
-     <#Description#>
+     Get File Sample Rate of previously read file
      
-     @return <#return value description#>
+     @return uint16_t sample rate
      */
     uint16_t getFileSampleRate();
     /**
-     <#Description#>
+     Get number of channels of previously read file
      
-     @return <#return value description#>
+     @return uint16_t number of channels
      */
     uint16_t getFileChannelNumber();
     /**
