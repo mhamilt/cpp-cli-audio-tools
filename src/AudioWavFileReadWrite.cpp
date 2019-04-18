@@ -60,25 +60,27 @@ void AudioWavFileReadWrite::writeWavSS(double **audioData, const char outputFile
     if (!file)
     {
         printf("Could not open file to write: check file path\n");
-        return void;
+        return;
     }
-    stereo16bitWaveHeaderForLength(numberOfFrames,sampleRate);
-    writeWaveHeaderToFile(file);
-    int16_t sdata;
-    //	const double amp = 32000.0;
-    const double amp = 32767.0; // absolute peak value of 16-bit PCM
-    
-    for(int i = 0; i < numberOfFrames; ++i)
+    else
     {
-        sdata = (int16_t)(audioData[0][i]*amp);
-        fwrite(&sdata, sizeof(int16_t), 1, file); //left channel
-        sdata = (int16_t)(audioData[1][i]*amp);
-        fwrite(&sdata, sizeof(int16_t), 1, file); //right channel
+        stereo16bitWaveHeaderForLength(numberOfFrames,sampleRate);
+        writeWaveHeaderToFile(file);
+        int16_t sdata;
+        //	const double amp = 32000.0;
+        const double amp = 32767.0; // absolute peak value of 16-bit PCM
+        
+        for(int i = 0; i < numberOfFrames; ++i)
+        {
+            sdata = (int16_t)(audioData[0][i]*amp);
+            fwrite(&sdata, sizeof(int16_t), 1, file); //left channel
+            sdata = (int16_t)(audioData[1][i]*amp);
+            fwrite(&sdata, sizeof(int16_t), 1, file); //right channel
+        }
+        printf("%d samples written to %s\n", numberOfFrames*2,outputFile);
     }
     fclose(file);
-    printf("%d samples written to %s\n", numberOfFrames*2,outputFile);
     
-    //delete &wavWriteFileHeader; //TODO: memory management for header
 }
 
 //==============================================================================
@@ -409,21 +411,23 @@ void AudioWavFileReadWrite::writeWavMS(double* audio,const char outputFile[], in
     if (!file)
     {
         printf("Could not open file to write: check file path\n");
-        return void;
+        return;
     }
-    mono16bitWaveHeaderForLength(numberOfFrames,sampleRate);
-    writeWaveHeaderToFile(file);
-    int16_t sdata;
-    const double amp = 32000.0;
-    
-    for(int i=0;i<numberOfFrames;++i)
+    else
     {
-        sdata = (int16_t)(audio[i]*amp);  //set sdata to PCM 16-bit
-        fwrite(&sdata, sizeof(int16_t), 1, file);
+        mono16bitWaveHeaderForLength(numberOfFrames,sampleRate);
+        writeWaveHeaderToFile(file);
+        int16_t sdata;
+        const double amp = 32000.0;
+        
+        for(int i=0;i<numberOfFrames;++i)
+        {
+            sdata = (int16_t)(audio[i]*amp);  //set sdata to PCM 16-bit
+            fwrite(&sdata, sizeof(int16_t), 1, file);
+        }
+        printf("%d samples written to %s\n", numberOfFrames,outputFile);
     }
-    
     fclose(file);
-    printf("%d samples written to %s\n", numberOfFrames,outputFile);
 }
 
 //==============================================================================
