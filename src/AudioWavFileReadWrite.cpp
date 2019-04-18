@@ -57,6 +57,11 @@ void AudioWavFileReadWrite::writeWavSS(double **audioData, const char outputFile
     normaliseStereoBuffer(audioData[0], audioData[1] ,numberOfFrames);
     FILE * file;
     file = fopen(outputFile, "w");
+    if (!file)
+    {
+        printf("Could not open file to write: check file path\n");
+        return void;
+    }
     stereo16bitWaveHeaderForLength(numberOfFrames,sampleRate);
     writeWaveHeaderToFile(file);
     int16_t sdata;
@@ -401,6 +406,11 @@ void AudioWavFileReadWrite::writeWavMS(double* audio,const char outputFile[], in
     
     FILE * file;
     file = fopen(outputFile, "w");
+    if (!file)
+    {
+        printf("Could not open file to write: check file path\n");
+        return void;
+    }
     mono16bitWaveHeaderForLength(numberOfFrames,sampleRate);
     writeWaveHeaderToFile(file);
     int16_t sdata;
