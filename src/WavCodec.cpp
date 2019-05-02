@@ -5,15 +5,15 @@
 //  Created by admin on 15/12/2017.
 //  Copyright © 2017 admin. All rights reserved.
 //
-#ifndef AudioWavFileReadWrite_hpp
-#include "AudioWavFileReadWrite.hpp"
+#ifndef WavCodec_hpp // WavCodec WavCodec
+#include "WavCodec.hpp"
 
 //==============================================================================
-AudioWavFileReadWrite::~AudioWavFileReadWrite(){}
+WavCodec::~WavCodec(){}
 //==============================================================================
-int AudioWavFileReadWrite::getSampleRate(){return wavReadFileSampRate;};
+int WavCodec::getSampleRate(){return wavReadFileSampRate;};
 //==============================================================================
-void AudioWavFileReadWrite::printWavHeader(const char *filename)
+void WavCodec::printWavHeader(const char *filename)
 {
     FILE *f;
     waveFormatHeader hdr;
@@ -52,7 +52,7 @@ void AudioWavFileReadWrite::printWavHeader(const char *filename)
 
 //==============================================================================
 
-void AudioWavFileReadWrite::writeWavSS(double **audioData, const char outputFile[], int numberOfFrames, double sampleRate)
+void WavCodec::writeWavSS(double **audioData, const char outputFile[], int numberOfFrames, double sampleRate)
 {
     normaliseStereoBuffer(audioData[0], audioData[1] ,numberOfFrames);
     FILE * file;
@@ -84,7 +84,7 @@ void AudioWavFileReadWrite::writeWavSS(double **audioData, const char outputFile
 }
 
 //==============================================================================
-bool AudioWavFileReadWrite::checkHeader(waveFormatHeader fileHeader)
+bool WavCodec::checkHeader(waveFormatHeader fileHeader)
 {
     
     if ((strncmp(&fileHeader.chunkID[0], "RIFF", 4))	 ||
@@ -101,7 +101,7 @@ bool AudioWavFileReadWrite::checkHeader(waveFormatHeader fileHeader)
 }
 //==============================================================================
 
-double* AudioWavFileReadWrite::readWav(const char *filename, int *sampsPerChan, int *sampleRate)
+double* WavCodec::readWav(const char *filename, int *sampsPerChan, int *sampleRate)
 {
     FILE *f;
     f = fopen(filename, "rb");
@@ -129,7 +129,7 @@ double* AudioWavFileReadWrite::readWav(const char *filename, int *sampsPerChan, 
 }
 
 //==============================================================================
-bool AudioWavFileReadWrite::parseWavMonoFile(double* data, FILE *f)
+bool WavCodec::parseWavMonoFile(double* data, FILE *f)
 {
     const int byteNum = wavReadFileHeader.bitsPerSample/8;
     uint8_t *const buf = new uint8_t[byteNum];
@@ -175,7 +175,7 @@ bool AudioWavFileReadWrite::parseWavMonoFile(double* data, FILE *f)
 }
 
 //==============================================================================
-bool AudioWavFileReadWrite::parseWavFile(double** data, FILE *f)
+bool WavCodec::parseWavFile(double** data, FILE *f)
 {
     const int byteNum = wavReadFileHeader.bitsPerSample/8;
     uint8_t *const buf = new uint8_t[byteNum];
@@ -219,7 +219,7 @@ bool AudioWavFileReadWrite::parseWavFile(double** data, FILE *f)
 
 //==============================================================================
 
-double** AudioWavFileReadWrite::readStereoWav(const char *filename, int *sampsPerChan, int *sampleRate)
+double** WavCodec::readStereoWav(const char *filename, int *sampsPerChan, int *sampleRate)
 {
     FILE *f;
     f = fopen(filename, "rb");
@@ -265,7 +265,7 @@ double** AudioWavFileReadWrite::readStereoWav(const char *filename, int *sampsPe
 }
 //==============================================================================
 
-void AudioWavFileReadWrite::setBasicHeader()
+void WavCodec::setBasicHeader()
 {
     //    wavWriteFileHeader = *new waveFormatHeader;
     memcpy(wavWriteFileHeader.chunkID, &"RIFF", 4);
@@ -275,7 +275,7 @@ void AudioWavFileReadWrite::setBasicHeader()
 }
 //==============================================================================
 
-void AudioWavFileReadWrite::stereo16bitWaveHeader(double sampleRate)
+void WavCodec::stereo16bitWaveHeader(double sampleRate)
 {
     setBasicHeader();
     wavWriteFileHeader.audioFormat = 1;
@@ -287,7 +287,7 @@ void AudioWavFileReadWrite::stereo16bitWaveHeader(double sampleRate)
     memcpy(wavWriteFileHeader.subChunk2ID, &"data", 4);
 }
 //==============================================================================
-void AudioWavFileReadWrite::mono16bitWaveHeader(double sampleRate)
+void WavCodec::mono16bitWaveHeader(double sampleRate)
 {
     setBasicHeader();
     wavWriteFileHeader.audioFormat = 1;
@@ -299,26 +299,26 @@ void AudioWavFileReadWrite::mono16bitWaveHeader(double sampleRate)
     memcpy(wavWriteFileHeader.subChunk2ID, &"data", 4);
 }
 //==============================================================================
-void AudioWavFileReadWrite::setLengthForWaveFormatHeader(size_t numberOfFrames)
+void WavCodec::setLengthForWaveFormatHeader(size_t numberOfFrames)
 {
     wavWriteFileHeader.subChunk2Size = (uint32_t)numberOfFrames * wavWriteFileHeader.numChannels * wavWriteFileHeader.bitsPerSample/8;
     wavWriteFileHeader.chunkSize = 36 + wavWriteFileHeader.subChunk2Size;
 }
 //==============================================================================
-void AudioWavFileReadWrite::stereo16bitWaveHeaderForLength(size_t numberOfFrames,double sampleRate)
+void WavCodec::stereo16bitWaveHeaderForLength(size_t numberOfFrames,double sampleRate)
 {
     stereo16bitWaveHeader(sampleRate);
     setLengthForWaveFormatHeader(numberOfFrames);
 }
 //==============================================================================
-void AudioWavFileReadWrite::mono16bitWaveHeaderForLength(size_t numberOfFrames,double sampleRate)
+void WavCodec::mono16bitWaveHeaderForLength(size_t numberOfFrames,double sampleRate)
 {
     mono16bitWaveHeader(sampleRate);
     setLengthForWaveFormatHeader(numberOfFrames);
 }
 //==============================================================================
 
-void AudioWavFileReadWrite::normaliseBuffer(double *audioData, int numberOfFrames)
+void WavCodec::normaliseBuffer(double *audioData, int numberOfFrames)
 {
     double temp;
     double maxy = 0.0; // Find max abs sample
@@ -356,7 +356,7 @@ void AudioWavFileReadWrite::normaliseBuffer(double *audioData, int numberOfFrame
 
 //==============================================================================
 
-void AudioWavFileReadWrite::normaliseStereoBuffer(double *audioL, double *audioR, int numberOfFrames)
+void WavCodec::normaliseStereoBuffer(double *audioL, double *audioR, int numberOfFrames)
 {
     double temp;
     double maxy = 0.0; // Find max abs sample
@@ -397,12 +397,12 @@ void AudioWavFileReadWrite::normaliseStereoBuffer(double *audioL, double *audioR
 }
 //==============================================================================
 
-size_t AudioWavFileReadWrite::writeWaveHeaderToFile(FILE * file)
+size_t WavCodec::writeWaveHeaderToFile(FILE * file)
 {
     return fwrite(&wavWriteFileHeader, sizeof(waveFormatHeader), 1, file);
 }
 
-void AudioWavFileReadWrite::writeWavMS(double* audio,const char outputFile[], int numberOfFrames, double sampleRate)
+void WavCodec::writeWavMS(double* audio,const char outputFile[], int numberOfFrames, double sampleRate)
 {
     normaliseBuffer(audio ,numberOfFrames);
     
@@ -431,7 +431,7 @@ void AudioWavFileReadWrite::writeWavMS(double* audio,const char outputFile[], in
 }
 
 //==============================================================================
-double** AudioWavFileReadWrite::whiteNoise(int sampsPerChan, int sampleRate)
+double** WavCodec::whiteNoise(int sampsPerChan, int sampleRate)
 {
     const double lo = -1.;
     const double hi =  1.;
@@ -450,7 +450,7 @@ double** AudioWavFileReadWrite::whiteNoise(int sampsPerChan, int sampleRate)
     return data;
 }
 //==============================================================================
-char* AudioWavFileReadWrite::readRawData(const char *filename, int *dataSize, int *sampleRate)
+char* WavCodec::readRawData(const char *filename, int *dataSize, int *sampleRate)
 {
     FILE *f = fopen(filename, "rb");
     if (!f)
@@ -482,16 +482,16 @@ char* AudioWavFileReadWrite::readRawData(const char *filename, int *dataSize, in
     return data;
 }
 //==============================================================================
-uint16_t AudioWavFileReadWrite::getFileSampleRate()
+uint16_t WavCodec::getFileSampleRate()
 {
     return wavReadFileHeader.sampleRate;
 }
-uint16_t AudioWavFileReadWrite::getFileChannelNumber()
+uint16_t WavCodec::getFileChannelNumber()
 {
     return wavReadFileHeader.numChannels;
 }
 
-uint16_t AudioWavFileReadWrite::getFileBitDepth()
+uint16_t WavCodec::getFileBitDepth()
 {
     return wavReadFileHeader.bitsPerSample;
 }

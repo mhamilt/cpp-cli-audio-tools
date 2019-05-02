@@ -3,6 +3,6 @@
 //==============================================================================
 #include "AudioPlayerOpenAL.hpp"
 #include "AudioPlayerOsX.hpp"
-#include "AudioWavFileReadWrite.hpp"
+#include "WavCodec.hpp"
 //==============================================================================
 #endif /*CliAudioTools_h*/

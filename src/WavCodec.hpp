@@ -1,5 +1,5 @@
-#ifndef AudioWavFileReadWrite_hpp
-#define AudioWavFileReadWrite_hpp
+#ifndef WavCodec_hpp
+#define WavCodec_hpp
 
 #include <iostream>
 #include <cmath>
@@ -7,7 +7,7 @@
 #include <fstream>
 
 /*!
- @class AudioWavFileReadWrite
+ @class WavCodec
  @brief a class with methods to read and write wav files.
  
  @discussion Sample values read from a wav file are normalised in a double type
@@ -25,7 +25,7 @@
  @author Matthew
  */
 //==============================================================================
-class AudioWavFileReadWrite
+class WavCodec
 {
 public: // Type definitions
     //==============================================================================
@@ -67,14 +67,14 @@ public:
     /**
      Constructor
      */
-    AudioWavFileReadWrite()
+    WavCodec()
     {
         srand (static_cast <unsigned> (time(0)));
     };
     /**
      Destructor
      */
-    ~AudioWavFileReadWrite();
+    ~WavCodec();
     //==============================================================================
     /** Retrieve the sampleRate of the read wav file
      @returns   sample rate of file as an int or NULL if no file has been read.

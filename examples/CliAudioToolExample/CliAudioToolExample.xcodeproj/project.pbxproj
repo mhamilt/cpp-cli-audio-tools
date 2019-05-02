@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		584EE0D92264AB4B00C841C9 /* AudioPlayerOpenAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 584EE0D22264AB4A00C841C9 /* AudioPlayerOpenAL.cpp */; };
-		584EE0DA2264AB4B00C841C9 /* AudioWavFileReadWrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 584EE0D32264AB4A00C841C9 /* AudioWavFileReadWrite.cpp */; };
+		584EE0DA2264AB4B00C841C9 /* WavCodec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 584EE0D32264AB4A00C841C9 /* WavCodec.cpp */; };
 		584EE0DB2264AB4B00C841C9 /* AudioPlayerOsX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 584EE0D62264AB4A00C841C9 /* AudioPlayerOsX.cpp */; };
 		58BB3F142243B3CC00C12F34 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58BB3F132243B3CC00C12F34 /* main.cpp */; };
 		58BB3F1C2243B3D700C12F34 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BB3F1B2243B3D700C12F34 /* AudioToolbox.framework */; };
@@ -30,9 +30,9 @@
 
 /* Begin PBXFileReference section */
 		584EE0D22264AB4A00C841C9 /* AudioPlayerOpenAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayerOpenAL.cpp; sourceTree = "<group>"; };
-		584EE0D32264AB4A00C841C9 /* AudioWavFileReadWrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioWavFileReadWrite.cpp; sourceTree = "<group>"; };
+		584EE0D32264AB4A00C841C9 /* WavCodec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavCodec.cpp; sourceTree = "<group>"; };
 		584EE0D42264AB4A00C841C9 /* AudioPlayerOsX.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioPlayerOsX.hpp; sourceTree = "<group>"; };
-		584EE0D52264AB4A00C841C9 /* AudioWavFileReadWrite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioWavFileReadWrite.hpp; sourceTree = "<group>"; };
+		584EE0D52264AB4A00C841C9 /* WavCodec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WavCodec.hpp; sourceTree = "<group>"; };
 		584EE0D62264AB4A00C841C9 /* AudioPlayerOsX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayerOsX.cpp; sourceTree = "<group>"; };
 		584EE0D72264AB4A00C841C9 /* CliAudioTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CliAudioTools.h; sourceTree = "<group>"; };
 		584EE0D82264AB4A00C841C9 /* AudioPlayerOpenAL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioPlayerOpenAL.hpp; sourceTree = "<group>"; };
@@ -62,8 +62,8 @@
 			children = (
 				584EE0D22264AB4A00C841C9 /* AudioPlayerOpenAL.cpp */,
 				584EE0D82264AB4A00C841C9 /* AudioPlayerOpenAL.hpp */,
-				584EE0D32264AB4A00C841C9 /* AudioWavFileReadWrite.cpp */,
-				584EE0D52264AB4A00C841C9 /* AudioWavFileReadWrite.hpp */,
+				584EE0D32264AB4A00C841C9 /* WavCodec.cpp */,
+				584EE0D52264AB4A00C841C9 /* WavCodec.hpp */,
 				584EE0D42264AB4A00C841C9 /* AudioPlayerOsX.hpp */,
 				584EE0D62264AB4A00C841C9 /* AudioPlayerOsX.cpp */,
 				584EE0D72264AB4A00C841C9 /* CliAudioTools.h */,
@@ -166,7 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				584EE0DB2264AB4B00C841C9 /* AudioPlayerOsX.cpp in Sources */,
-				584EE0DA2264AB4B00C841C9 /* AudioWavFileReadWrite.cpp in Sources */,
+				584EE0DA2264AB4B00C841C9 /* WavCodec.cpp in Sources */,
 				584EE0D92264AB4B00C841C9 /* AudioPlayerOpenAL.cpp in Sources */,
 				58BB3F142243B3CC00C12F34 /* main.cpp in Sources */,
 			);

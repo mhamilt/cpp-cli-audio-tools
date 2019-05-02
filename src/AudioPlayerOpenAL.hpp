@@ -2,7 +2,7 @@
 #define AudioPlayerOpenAL_hpp
 //==============================================================================
 #include <stdio.h>
-#include "AudioWavFileReadWrite.hpp"
+#include "WavCodec.hpp"
 #ifdef __APPLE__
 #include "TargetConditionals.h"
 #ifdef TARGET_OS_MAC
@@ -90,7 +90,7 @@ private:
     ALenum getAlFormat(uint8_t channelCount, uint8_t bitDepth);
 private:
     /// internal file reader
-    AudioWavFileReadWrite wavReadWrite;
+    WavCodec wavReadWrite;
 };
 
 #endif /* AudioPlayerOpenAL_hpp */

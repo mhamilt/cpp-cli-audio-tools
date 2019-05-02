@@ -19,7 +19,7 @@ int main(int argc, const char * argv[])
     apOsX.playFile(wavFileName);
     //--------------------------------------------------------------------
     // Load Audio Data from file then play
-    AudioWavFileReadWrite wavReader;
+    WavCodec wavReader;
     int sampsPerChan, sampleRate;
     double *y = wavReader.readWav(wavFileName, &sampsPerChan, &sampleRate);
     float *x = new float[sampsPerChan];
