@@ -41,7 +41,7 @@ void WavCodec::printWavHeader(const char *filename)
         printf("Bits Per Samp   : %u\n", hdr.bitsPerSample);
         printf("Sub-Chunk 2     : %.4s\n", hdr.subChunk2ID);
         printf("Sub-Chunk 2 size: %u\n", hdr.subChunk2Size);
-        //        printf("SampsPerChan    : %u\n", hdr.subChunk2Size*8/(hdr.numChannels*hdr.bitsPerSample));
+        printf("Samples Per Chan: %u\n", hdr.subChunk2Size*8/(hdr.numChannels*hdr.bitsPerSample));
         printf("\n");
         fclose(f);
     }

@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		582035F722806E650003A2E0 /* libMattAudioToolLibrary.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 58784B69228033E400D7B9A8 /* libMattAudioToolLibrary.dylib */; };
+		58784B542280334D00D7B9A8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58784B532280334D00D7B9A8 /* main.cpp */; };
+		58784B6F228033F000D7B9A8 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58784B6E228033F000D7B9A8 /* OpenAL.framework */; };
+		58784B71228033F500D7B9A8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58784B70228033F500D7B9A8 /* AudioToolbox.framework */; };
+		58784B732280340E00D7B9A8 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58784B722280340E00D7B9A8 /* CoreFoundation.framework */; };
+		58784B782280348700D7B9A8 /* AudioPlayerOpenAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58784B5B2280336D00D7B9A8 /* AudioPlayerOpenAL.cpp */; };
+		58784B792280348700D7B9A8 /* WavCodec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58784B5D2280336D00D7B9A8 /* WavCodec.cpp */; };
+		58784B7A2280348700D7B9A8 /* AudioPlayerOsX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58784B5F2280336D00D7B9A8 /* AudioPlayerOsX.cpp */; };
+		58784B7B2280350200D7B9A8 /* MattsAudioTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 58784B602280336D00D7B9A8 /* MattsAudioTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58784B8722803CD000D7B9A8 /* MattsAudioTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 58784B602280336D00D7B9A8 /* MattsAudioTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58784B8822803CE200D7B9A8 /* WavCodec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58784B5D2280336D00D7B9A8 /* WavCodec.cpp */; };
+		58784B8922803CE200D7B9A8 /* AudioPlayerOsX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58784B5F2280336D00D7B9A8 /* AudioPlayerOsX.cpp */; };
+		58784B8A22803CE200D7B9A8 /* AudioPlayerOpenAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58784B5B2280336D00D7B9A8 /* AudioPlayerOpenAL.cpp */; };
+		58784B8B22803D0900D7B9A8 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58784B6E228033F000D7B9A8 /* OpenAL.framework */; };
+		58784B8C22803D0F00D7B9A8 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58784B722280340E00D7B9A8 /* CoreFoundation.framework */; };
+		58784B8D22803D1500D7B9A8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58784B70228033F500D7B9A8 /* AudioToolbox.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		58784B7D2280354800D7B9A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58784B482280334D00D7B9A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58784B68228033E400D7B9A8;
+			remoteInfo = MattAudioToolLibrary;
+		};
+		58784B8F22803D3D00D7B9A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58784B482280334D00D7B9A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 58784B8222803CB500D7B9A8;
+			remoteInfo = MattsAudioToolsStatic;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		58784B4E2280334D00D7B9A8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		58784B502280334D00D7B9A8 /* MattsAudioTools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MattsAudioTools; sourceTree = BUILT_PRODUCTS_DIR; };
+		58784B532280334D00D7B9A8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		58784B5B2280336D00D7B9A8 /* AudioPlayerOpenAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayerOpenAL.cpp; sourceTree = "<group>"; };
+		58784B5C2280336D00D7B9A8 /* AudioPlayerOsX.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioPlayerOsX.hpp; sourceTree = "<group>"; };
+		58784B5D2280336D00D7B9A8 /* WavCodec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavCodec.cpp; sourceTree = "<group>"; };
+		58784B5E2280336D00D7B9A8 /* WavCodec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WavCodec.hpp; sourceTree = "<group>"; };
+		58784B5F2280336D00D7B9A8 /* AudioPlayerOsX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayerOsX.cpp; sourceTree = "<group>"; };
+		58784B602280336D00D7B9A8 /* MattsAudioTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MattsAudioTools.h; sourceTree = "<group>"; };
+		58784B612280336D00D7B9A8 /* AudioPlayerOpenAL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioPlayerOpenAL.hpp; sourceTree = "<group>"; };
+		58784B69228033E400D7B9A8 /* libMattAudioToolLibrary.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMattAudioToolLibrary.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		58784B6E228033F000D7B9A8 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		58784B70228033F500D7B9A8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		58784B722280340E00D7B9A8 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		58784B8322803CB500D7B9A8 /* libMattsAudioToolsStatic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMattsAudioToolsStatic.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58784B4D2280334D00D7B9A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				582035F722806E650003A2E0 /* libMattAudioToolLibrary.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58784B66228033E400D7B9A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58784B732280340E00D7B9A8 /* CoreFoundation.framework in Frameworks */,
+				58784B71228033F500D7B9A8 /* AudioToolbox.framework in Frameworks */,
+				58784B6F228033F000D7B9A8 /* OpenAL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58784B8022803CB500D7B9A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58784B8D22803D1500D7B9A8 /* AudioToolbox.framework in Frameworks */,
+				58784B8C22803D0F00D7B9A8 /* CoreFoundation.framework in Frameworks */,
+				58784B8B22803D0900D7B9A8 /* OpenAL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		58784B472280334D00D7B9A8 = {
+			isa = PBXGroup;
+			children = (
+				58784B5A2280336D00D7B9A8 /* src */,
+				58784B522280334D00D7B9A8 /* MattsAudioTools */,
+				58784B512280334D00D7B9A8 /* Products */,
+				58784B6D228033F000D7B9A8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		58784B512280334D00D7B9A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				58784B502280334D00D7B9A8 /* MattsAudioTools */,
+				58784B69228033E400D7B9A8 /* libMattAudioToolLibrary.dylib */,
+				58784B8322803CB500D7B9A8 /* libMattsAudioToolsStatic.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		58784B522280334D00D7B9A8 /* MattsAudioTools */ = {
+			isa = PBXGroup;
+			children = (
+				58784B532280334D00D7B9A8 /* main.cpp */,
+			);
+			path = MattsAudioTools;
+			sourceTree = "<group>";
+		};
+		58784B5A2280336D00D7B9A8 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				58784B5C2280336D00D7B9A8 /* AudioPlayerOsX.hpp */,
+				58784B5D2280336D00D7B9A8 /* WavCodec.cpp */,
+				58784B5E2280336D00D7B9A8 /* WavCodec.hpp */,
+				58784B5F2280336D00D7B9A8 /* AudioPlayerOsX.cpp */,
+				58784B602280336D00D7B9A8 /* MattsAudioTools.h */,
+				58784B612280336D00D7B9A8 /* AudioPlayerOpenAL.hpp */,
+				58784B5B2280336D00D7B9A8 /* AudioPlayerOpenAL.cpp */,
+			);
+			name = src;
+			path = ../../src;
+			sourceTree = "<group>";
+		};
+		58784B6D228033F000D7B9A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58784B722280340E00D7B9A8 /* CoreFoundation.framework */,
+				58784B70228033F500D7B9A8 /* AudioToolbox.framework */,
+				58784B6E228033F000D7B9A8 /* OpenAL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		58784B67228033E400D7B9A8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58784B7B2280350200D7B9A8 /* MattsAudioTools.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58784B8122803CB500D7B9A8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58784B8722803CD000D7B9A8 /* MattsAudioTools.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		58784B4F2280334D00D7B9A8 /* MattsAudioTools */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58784B572280334D00D7B9A8 /* Build configuration list for PBXNativeTarget "MattsAudioTools" */;
+			buildPhases = (
+				58784B4C2280334D00D7B9A8 /* Sources */,
+				58784B4D2280334D00D7B9A8 /* Frameworks */,
+				58784B4E2280334D00D7B9A8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				58784B9022803D3D00D7B9A8 /* PBXTargetDependency */,
+				58784B7E2280354800D7B9A8 /* PBXTargetDependency */,
+			);
+			name = MattsAudioTools;
+			productName = MattsAudioTools;
+			productReference = 58784B502280334D00D7B9A8 /* MattsAudioTools */;
+			productType = "com.apple.product-type.tool";
+		};
+		58784B68228033E400D7B9A8 /* MattAudioToolLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58784B6A228033E400D7B9A8 /* Build configuration list for PBXNativeTarget "MattAudioToolLibrary" */;
+			buildPhases = (
+				58784B65228033E400D7B9A8 /* Sources */,
+				58784B66228033E400D7B9A8 /* Frameworks */,
+				58784B67228033E400D7B9A8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MattAudioToolLibrary;
+			productName = MattAudioToolLibrary;
+			productReference = 58784B69228033E400D7B9A8 /* libMattAudioToolLibrary.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		58784B8222803CB500D7B9A8 /* MattsAudioToolsStatic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58784B8422803CB500D7B9A8 /* Build configuration list for PBXNativeTarget "MattsAudioToolsStatic" */;
+			buildPhases = (
+				58784B7F22803CB500D7B9A8 /* Sources */,
+				58784B8022803CB500D7B9A8 /* Frameworks */,
+				58784B8122803CB500D7B9A8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MattsAudioToolsStatic;
+			productName = MattsAudioToolsStatic;
+			productReference = 58784B8322803CB500D7B9A8 /* libMattsAudioToolsStatic.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58784B482280334D00D7B9A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = mhamilt7;
+				TargetAttributes = {
+					58784B4F2280334D00D7B9A8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					58784B68228033E400D7B9A8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					58784B8222803CB500D7B9A8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 58784B4B2280334D00D7B9A8 /* Build configuration list for PBXProject "MattsAudioTools" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 58784B472280334D00D7B9A8;
+			productRefGroup = 58784B512280334D00D7B9A8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58784B4F2280334D00D7B9A8 /* MattsAudioTools */,
+				58784B68228033E400D7B9A8 /* MattAudioToolLibrary */,
+				58784B8222803CB500D7B9A8 /* MattsAudioToolsStatic */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58784B4C2280334D00D7B9A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58784B542280334D00D7B9A8 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58784B65228033E400D7B9A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58784B782280348700D7B9A8 /* AudioPlayerOpenAL.cpp in Sources */,
+				58784B792280348700D7B9A8 /* WavCodec.cpp in Sources */,
+				58784B7A2280348700D7B9A8 /* AudioPlayerOsX.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58784B7F22803CB500D7B9A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58784B8822803CE200D7B9A8 /* WavCodec.cpp in Sources */,
+				58784B8922803CE200D7B9A8 /* AudioPlayerOsX.cpp in Sources */,
+				58784B8A22803CE200D7B9A8 /* AudioPlayerOpenAL.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		58784B7E2280354800D7B9A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 58784B68228033E400D7B9A8 /* MattAudioToolLibrary */;
+			targetProxy = 58784B7D2280354800D7B9A8 /* PBXContainerItemProxy */;
+		};
+		58784B9022803D3D00D7B9A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 58784B8222803CB500D7B9A8 /* MattsAudioToolsStatic */;
+			targetProxy = 58784B8F22803D3D00D7B9A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		58784B552280334D00D7B9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		58784B562280334D00D7B9A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		58784B582280334D00D7B9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XZ388CS8AV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		58784B592280334D00D7B9A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XZ388CS8AV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		58784B6B228033E400D7B9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XZ388CS8AV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		58784B6C228033E400D7B9A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XZ388CS8AV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		58784B8522803CB500D7B9A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XZ388CS8AV;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		58784B8622803CB500D7B9A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XZ388CS8AV;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58784B4B2280334D00D7B9A8 /* Build configuration list for PBXProject "MattsAudioTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58784B552280334D00D7B9A8 /* Debug */,
+				58784B562280334D00D7B9A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58784B572280334D00D7B9A8 /* Build configuration list for PBXNativeTarget "MattsAudioTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58784B582280334D00D7B9A8 /* Debug */,
+				58784B592280334D00D7B9A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58784B6A228033E400D7B9A8 /* Build configuration list for PBXNativeTarget "MattAudioToolLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58784B6B228033E400D7B9A8 /* Debug */,
+				58784B6C228033E400D7B9A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58784B8422803CB500D7B9A8 /* Build configuration list for PBXNativeTarget "MattsAudioToolsStatic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58784B8522803CB500D7B9A8 /* Debug */,
+				58784B8622803CB500D7B9A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58784B482280334D00D7B9A8 /* Project object */;
+}

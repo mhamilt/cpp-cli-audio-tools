@@ -68,7 +68,7 @@ public:
                        unsigned int samplingRate,
                        uint8_t bitDepth);
 private:
-    void testError(const char *message);
+    static void testError(const char *message);
     void playAudio(ALvoid *data,
                    uint8_t channelCount,
                    ALsizei numberOfBytes,

@@ -1,11 +1,15 @@
+/*
+ *  WavCodec: A very basic wav file reader / writer
+ */
+//==============================================================================
 #ifndef WavCodec_hpp
 #define WavCodec_hpp
-
+//==============================================================================
 #include <iostream>
 #include <cmath>
 #include <cstdint>
 #include <fstream>
-
+//==============================================================================
 /*!
  @class WavCodec
  @brief a class with methods to read and write wav files.
@@ -22,7 +26,7 @@
 	but will be expanded upon
  
  @version 0.1
- @author Matthew
+ @author Matthew Hamilton
  */
 //==============================================================================
 class WavCodec
