@@ -9,6 +9,7 @@
 #include <cmath>
 #include <cstdint>
 #include <fstream>
+#include <ctime>
 //==============================================================================
 /*!
  @class WavCodec

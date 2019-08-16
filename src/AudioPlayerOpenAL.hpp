@@ -9,10 +9,10 @@
 #include <OpenAL/OpenAL.h>
 #endif
 #elif defined _WIN32 || defined _WIN64
-#include <AL/al.h>
-#include <AL/alc.h>
+#include <al.h>
+#include <alc.h>
 #endif
-#include <OpenAL/OpenAL.h>
+
 //==============================================================================
 
 class AudioPlayerOpenAL
