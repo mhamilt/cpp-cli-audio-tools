@@ -7,12 +7,12 @@
 //
 
 #include <iostream>
-#include "../../../src/CliAudioTools.h"
+#include "../../../src/MattsAudioTools.h"
 
 int main(int argc, const char * argv[])
 {
     //--------------------------------------------------------------------
-    const char *wavFileName = "/path/to/file.wav";
+    const char *wavFileName = "path/to/file.wav";
     AudioPlayerOpenAL ap;
     ap.playFile(wavFileName);
     AudioPlayerOsX apOsX;

@@ -75,14 +75,14 @@ void AudioPlayerOpenAL::playAudio(ALvoid *data,
     
     if (!data)
     {
-        std::cout << "LOAD ERROR: check the file name is correct" << '\n';
+        std::cout << "LOAD ERROR: check the file name is correct" << '\n' << '\n';
     }
     
     alBufferData(buffer, getAlFormat(channelCount,bitDepth), data, numberOfBytes, samplingRate);
-    testError("Fail at alBufferData");
+    testError("Fail at alBufferData\n");
     
     alSourcei(source, AL_BUFFER, buffer);
-    testError("buffer binding");
+    testError("buffer binding\n");
     
     alSourcePlay(source);
     testError("source playing");
@@ -123,7 +123,6 @@ void AudioPlayerOpenAL::playAudioData(float *audioData,
 //    uint8_t *audioDataConversion = new uint8_t[numberOfBytes];
     char *audioDataConversion = new char[numberOfBytes];
     const float maxValue = pow(2., bitDepth - 1);
-    
     
     const float radPerSec = 440.f * 2.f * 3.1415926536f / 44100.f;
     

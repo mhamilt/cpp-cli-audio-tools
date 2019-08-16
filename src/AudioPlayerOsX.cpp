@@ -303,9 +303,12 @@ void AudioPlayerOsX::playFile(const char *fn)
     CFURLRef url = CFURLCreateFromFileSystemRepresentation(nullptr, (UInt8*)fn, strlen(fn), false );
     if(!this->load(url))
     {
-        std::cout << "something went terribly wrong when loading the file" << '\n';
+        std::cout << "OSX Player: Something went terribly wrong when loading the file" << '\n' << '\n';
     }
+    else
+    {
     CFRelease(url);
+    
     //==========================================================================
     this->play();
     //==========================================================================
@@ -314,6 +317,7 @@ void AudioPlayerOsX::playFile(const char *fn)
         CFRunLoopRunInMode (kCFRunLoopDefaultMode,.5,false);
     }
     while (this->isPlaying());
+    }
 }
 
 #endif

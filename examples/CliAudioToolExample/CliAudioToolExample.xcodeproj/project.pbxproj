@@ -34,13 +34,13 @@
 		584EE0D42264AB4A00C841C9 /* AudioPlayerOsX.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioPlayerOsX.hpp; sourceTree = "<group>"; };
 		584EE0D52264AB4A00C841C9 /* WavCodec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WavCodec.hpp; sourceTree = "<group>"; };
 		584EE0D62264AB4A00C841C9 /* AudioPlayerOsX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayerOsX.cpp; sourceTree = "<group>"; };
-		584EE0D72264AB4A00C841C9 /* CliAudioTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CliAudioTools.h; sourceTree = "<group>"; };
 		584EE0D82264AB4A00C841C9 /* AudioPlayerOpenAL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioPlayerOpenAL.hpp; sourceTree = "<group>"; };
 		58BB3F102243B3CC00C12F34 /* CliAudioToolExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CliAudioToolExample; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BB3F132243B3CC00C12F34 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		58BB3F1B2243B3D700C12F34 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		58BB3F1D2243B3E300C12F34 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		58BB3F1F2243B3E900C12F34 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		58FBDADC2306BF03009B5504 /* MattsAudioTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MattsAudioTools.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +60,13 @@
 		584EE0D12264AB4A00C841C9 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				58FBDADC2306BF03009B5504 /* MattsAudioTools.h */,
 				584EE0D22264AB4A00C841C9 /* AudioPlayerOpenAL.cpp */,
 				584EE0D82264AB4A00C841C9 /* AudioPlayerOpenAL.hpp */,
 				584EE0D32264AB4A00C841C9 /* WavCodec.cpp */,
 				584EE0D52264AB4A00C841C9 /* WavCodec.hpp */,
 				584EE0D42264AB4A00C841C9 /* AudioPlayerOsX.hpp */,
 				584EE0D62264AB4A00C841C9 /* AudioPlayerOsX.cpp */,
-				584EE0D72264AB4A00C841C9 /* CliAudioTools.h */,
 			);
 			name = src;
 			path = ../../src;
