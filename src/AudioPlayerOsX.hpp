@@ -1,3 +1,7 @@
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#ifdef TARGET_OS_MAC
+
 #ifndef OSX_AUDIOPLAYER_H
 #define OSX_AUDIOPLAYER_H
 //==============================================================================
@@ -101,3 +105,5 @@ private:
 };
 
 #endif /*EPOXY_AUDIOPLAYER_H*/
+#endif
+#endif
