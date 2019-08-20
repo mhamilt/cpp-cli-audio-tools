@@ -192,14 +192,14 @@ public:
        @param audioData audio Data passed as a float
        @param numberOfFrames Number of samples per channel
      */
-    void normaliseBuffer(float *audioData, int numberOfFrames);
+    static void normaliseBuffer(float *audioData, int numberOfFrames);
 
     /** Normalise two arrays of audio data representing a stereo signal;
        @param audioL audio data left channel
        @param audioR audio data right channel
        @param numberOfFrames number of samples per channel
      */
-    void normaliseStereoBuffer(float *audioL, float *audioR, int numberOfFrames);
+    static void normaliseStereoBuffer(float *audioL, float *audioR, int numberOfFrames);
 
 private: // Methods
     //==============================================================================
