@@ -44,7 +44,7 @@ OpenAL is an SDK primarily for Game Audio and simple acoustics modelling. Howeve
 
 ### Visual Studio
 
-[Download the OpenAL SDK](https://www.openal.org/downloads/)
+[Download the OpenAL SDK and Windows Installer](https://www.OpenAL.org/downloads/). Unzip and run both.
 
 - **Create a new console project**
 
@@ -54,7 +54,7 @@ OpenAL is an SDK primarily for Game Audio and simple acoustics modelling. Howeve
 
 ![](gifs/OpenALAddHeaderInclude.gif)
 
-- **Add OpenAl library in linker**
+- **Add OpenAL library in linker**
 
 ![](gifs/OpenALAddLibs.gif)
 
