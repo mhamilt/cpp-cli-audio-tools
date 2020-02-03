@@ -9,9 +9,9 @@
 #include <iostream>
 #include "../../../src/MattsAudioTools.h"
 
+
 int main(int argc, const char * argv[])
 {
-    
     //--------------------------------------------------------------------
     AudioPlayerOpenAL ap;
     //--------------------------------------------------------------------
@@ -21,7 +21,7 @@ int main(int argc, const char * argv[])
 //    int millis = 1000;
     int n = 44100 * 5;
     int bitDeph = 16; // 8 or 16
-    
+    float fHz = atof(argv[1]);
     float *sineWave = new float[n * channels];
     
     float radPerSec = 440.f * 2.f * 3.1415926536f / float(fs);
