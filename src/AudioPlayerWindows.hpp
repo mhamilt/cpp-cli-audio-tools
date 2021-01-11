@@ -11,10 +11,12 @@
 #if defined _WIN32 || defined _WIN64
 //==============================================================================
 #include <iostream>
-#include "TargetConditionals.h"
 #include <windows.h>
-#include <mmsystem.h>
+//#include <mmsystem.h>
+#include <Mmdeviceapi.h>
+#include <audioclient.h>
 #include "WavCodec.hpp"
+
 //==============================================================================
 
 class AudioPlayerWindows
@@ -73,8 +75,8 @@ private:
     static void testError(const char *message);
     void playAudio(void *data,
                    uint8_t channelCount,
-                   ALsizei numberOfBytes,
-                   ALsizei samplingRate,
+                   UINT32 numberOfBytes,
+                   UINT32 samplingRate,
                    uint8_t bitDepth);
     /**
      convert floating point number to a byte value
