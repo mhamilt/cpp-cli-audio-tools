@@ -87,10 +87,33 @@ private:
      */
     static uint8_t audioFloat2Byte(float val, float maxValue, uint8_t byteNum);
     
+    /**
+    * Play audio data using WASAPI, see: https://docs.microsoft.com/en-us/windows/win32/coreaudio/rendering-a-stream
+    */
+    HRESULT PlayAudioStream ();
 private:
-    /// internal file reader
+    /// internal file reader            
     WavCodec wavReadWrite;
+
+    //------------------------------------------------------------------------------------------------------
+    // Windows specific constants
+    static constexpr REFERENCE_TIME REFTIMES_PER_SEC = 2500000;
+    static constexpr REFERENCE_TIME REFTIMES_PER_MILLISEC = 10000;
+    const CLSID CLSID_MMDeviceEnumerator = __uuidof( MMDeviceEnumerator );
+    const IID IID_IMMDeviceEnumerator = __uuidof( IMMDeviceEnumerator );
+    const IID IID_IAudioClient = __uuidof( IAudioClient );
+    const IID IID_IAudioRenderClient = __uuidof( IAudioRenderClient );
+
 };
+
+
+// Ugly define macros I will get rid of at some point
+#define EXIT_ON_ERROR(hres)  \
+              if (FAILED(hres)) {std::cout << hres<< '\n'; goto Exit; }
+#define SAFE_RELEASE(punk)  \
+              if ((punk) != NULL)  \
+                { (punk)->Release(); (punk) = NULL; }
+
 
 #endif /* Windows Compile guard */
 #endif /* AudioPlayerWindows_hpp */
