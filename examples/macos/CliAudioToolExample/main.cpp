@@ -24,7 +24,7 @@ int main(int argc, const char * argv[])
     float fHz = atof(argv[1]);
     float *sineWave = new float[n * channels];
     
-    float radPerSec = 440.f * 2.f * 3.1415926536f / float(fs);
+    float radsPerSample = 440.f * 2.f * 3.1415926536f / float(fs);
     
     for (int i = 0; i < n; ++i)
     {
@@ -35,10 +35,10 @@ int main(int argc, const char * argv[])
             switch (channel)
             {
                 case 0:
-                    sineWave[frame] += sin(float(i) * radPerSec);
+                    sineWave[frame] += sin(float(i) * radsPerSample);
                     break;
                 case 1:
-                    sineWave[frame] += sin(float(i) * radPerSec * 1.5);
+                    sineWave[frame] += sin(float(i) * radsPerSample * 1.5);
                     break;
             }
             sineWave[frame] *= 0.9;
