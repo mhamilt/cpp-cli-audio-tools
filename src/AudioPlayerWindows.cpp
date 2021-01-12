@@ -9,45 +9,45 @@
 #if defined _WIN32 || defined _WIN64
 #include "AudioPlayerWindows.hpp"
 
-HRESULT AudioPlayerWindows::PlayAudioStream ()
+AudioPlayerWindows::AudioPlayerWindows ()
 {
-    HRESULT hr;
-    REFERENCE_TIME hnsRequestedDuration = REFTIMES_PER_SEC;
-    REFERENCE_TIME hnsActualDuration;
-    IMMDeviceEnumerator* pEnumerator = NULL;
-    IMMDevice* pDevice = NULL;
-    IAudioClient* pAudioClient = NULL;
-    IAudioRenderClient* pRenderClient = NULL;
-    WAVEFORMATEX* pwfx = NULL;
-    UINT32 bufferFrameCount;
-    UINT32 numFramesAvailable;
-    UINT32 numFramesPadding;
-    BYTE* pData;
-    DWORD flags = 0;
-
-    std::cout << "CoCreateInstance\n";
+    HRESULT hr = CoInitialize (nullptr);
+    if ( FAILED (hr) ) 
+    {
+        exit;
+    }
+    printDebugMessage ("CoCreateInstance");
     hr = CoCreateInstance (CLSID_MMDeviceEnumerator,
                            NULL,
                            CLSCTX_ALL, IID_IMMDeviceEnumerator,
                            (void**) &pEnumerator);
-    EXIT_ON_ERROR (hr);
-    std::cout << "GetDefaultAudioEndpoint\n";
+    printDebugMessage ("GetDefaultAudioEndpoint");
 
     hr = pEnumerator->GetDefaultAudioEndpoint (
         eRender, eConsole, &pDevice);
-    EXIT_ON_ERROR (hr);
 
-    std::cout << "Activate\n";
-    hr = pDevice->Activate (
-        IID_IAudioClient, CLSCTX_ALL,
-        NULL, (void**) &pAudioClient);
-    EXIT_ON_ERROR (hr);
+    printDebugMessage ("Activate");
+    hr = pDevice->Activate (IID_IAudioClient, 
+                            CLSCTX_ALL,
+                            NULL, 
+                            (void**) &pAudioClient);
 
-    std::cout << "GetMixFormat\n";
+    printDebugMessage ("GetMixFormat");
     hr = pAudioClient->GetMixFormat (&pwfx);
-    EXIT_ON_ERROR (hr);
+    
+    printDebugMessage ("SetFormat");
+    hr = SetFormat (pwfx); // Tell the audio source which format to use.
+    
+}
 
-    std::cout << "Initialize\n";
+AudioPlayerWindows::~AudioPlayerWindows ()
+{
+    CoUninitialize ();
+}
+
+HRESULT AudioPlayerWindows::PlayAudioStream ()
+{
+    printDebugMessage ("Initialize");
     hr = pAudioClient->Initialize (
         AUDCLNT_SHAREMODE_SHARED,
         0,
@@ -55,19 +55,14 @@ HRESULT AudioPlayerWindows::PlayAudioStream ()
         0,
         pwfx,
         NULL);
-    EXIT_ON_ERROR (hr);
-
-    // Tell the audio source which format to use.
-    std::cout << "pMySource->SetFormat\n";
-    hr = pMySource->SetFormat (pwfx);
-    EXIT_ON_ERROR (hr);
+     EXIT_ON_ERROR (hr);
 
     // Get the actual size of the allocated buffer.
-    std::cout << "GetBufferSize\n";
+    printDebugMessage ("GetBufferSize");
     hr = pAudioClient->GetBufferSize (&bufferFrameCount);
     EXIT_ON_ERROR (hr);
 
-    std::cout << "GetService\n";
+    printDebugMessage ("GetService");
 
     hr = pAudioClient->GetService (
         IID_IAudioRenderClient,
@@ -79,7 +74,7 @@ HRESULT AudioPlayerWindows::PlayAudioStream ()
     EXIT_ON_ERROR (hr);
 
     // Load the initial data into the shared buffer.
-    hr = pMySource->LoadData (bufferFrameCount, pData, &flags);
+    hr = LoadData (bufferFrameCount, pData, &flags);
     EXIT_ON_ERROR (hr);
 
     hr = pRenderClient->ReleaseBuffer (bufferFrameCount, flags);
@@ -109,7 +104,7 @@ HRESULT AudioPlayerWindows::PlayAudioStream ()
         EXIT_ON_ERROR (hr);
 
         // Get next 1/2-second of data from the audio source.
-        hr = pMySource->LoadData (numFramesAvailable, pData, &flags);
+        hr = LoadData (numFramesAvailable, pData, &flags);
         EXIT_ON_ERROR (hr);
 
         hr = pRenderClient->ReleaseBuffer (numFramesAvailable, flags);
@@ -132,4 +127,111 @@ Exit:
     return hr;
 }
 
+HRESULT AudioPlayerWindows::SetFormat (WAVEFORMATEX* wfex)
+{
+    if ( wfex->wFormatTag == WAVE_FORMAT_EXTENSIBLE )
+    {
+        format = *reinterpret_cast<WAVEFORMATEXTENSIBLE*>( wfex );
+    }
+    else
+    {
+        format.Format = *wfex;
+        format.Format.wFormatTag = WAVE_FORMAT_EXTENSIBLE;
+        INIT_WAVEFORMATEX_GUID (&format.SubFormat, wfex->wFormatTag);
+        format.Samples.wValidBitsPerSample = format.Format.wBitsPerSample;
+        format.dwChannelMask = 0;
+    }
+    
+    if(VERBOSE)
+    {
+        const UINT16 formatTag = EXTRACT_WAVEFORMATEX_ID (&format.SubFormat);
+        std::cout << "Channel Count: " << format.Format.nChannels << '\n';
+        std::cout << "Audio Format: ";
+        switch ( formatTag )
+        {
+            case WAVE_FORMAT_IEEE_FLOAT:
+                std::cout << "WAVE_FORMAT_IEEE_FLOAT\n";
+                break;
+            case WAVE_FORMAT_PCM:
+                std::cout << "WAVE_FORMAT_PCM\n";
+                break;
+            default:
+                std::cout << "Wave Format Unknown\n";
+                break;
+        }
+    }
+    return 0;
+}
+
+HRESULT AudioPlayerWindows::LoadData (UINT32 frameCount, BYTE* audioOutputBuffer, DWORD* flags)
+{
+    float* fData = (float*) audioOutputBuffer;
+    UINT32 totalBufferSamples = frameCount * format.Format.nChannels;
+    if ( !initialised )
+    {
+        initialised = true;
+        if ( VERBOSE )
+        {
+            std::cout << "bufferSize: " << frameCount * format.Format.nChannels << '\n';
+            std::cout << "frameCount: " << frameCount << '\n';
+            std::cout << "buffer address: " << int (audioOutputBuffer) << '\n';
+        }
+    }
+
+    if ( audioDataBufferPos < numAudioSamples )
+    {
+        for ( UINT32 i = 0; i < totalBufferSamples; i += format.Format.nChannels )
+        {
+            for ( size_t chan = 0; chan < format.Format.nChannels; chan++ )
+            {
+                fData[i + chan] = ( audioDataBufferPos < numAudioSamples ) ? audioData[audioDataBufferPos] : 0.0f;
+            }
+            audioDataBufferPos++;
+        }
+    }
+    else
+    {
+        *flags = AUDCLNT_BUFFERFLAGS_SILENT;
+    }
+    return 0;
+}
+
+void AudioPlayerWindows::initAudio (float* audioInData, unsigned int numSamples)
+{
+    audioData = audioInData;
+    numAudioSamples = numSamples;
+    audioDataBufferPos = 0;
+}
+
+void AudioPlayerWindows::reset ()
+{    
+    audioDataBufferPos = 0;
+}
+
+HRESULT AudioPlayerWindows::playAudioData (float* audioInData, unsigned long numSamples, uint8_t channelCount)
+{
+    printDebugMessage (__FUNCTION__);
+
+    if ( channelCount != 1 )
+    {
+        std::cout << "Sorry, Channel format must be mono. If this is problematic, please write your concern on a note, nail it to a frisbee and fling it over a rainbow\n\n";
+        return 1;
+    }
+    initialised = false;
+    initAudio (audioInData, numSamples);
+
+    PlayAudioStream();
+}
+
+float AudioPlayerWindows::getSystemSampleRate ()
+{
+    return format.Format.nSamplesPerSec;
+}
+
+
+void AudioPlayerWindows::printDebugMessage (const char* msg)
+{
+    if ( VERBOSE )
+        std::cout << msg << '\n';
+}
 #endif /* Windows Compile guard */
