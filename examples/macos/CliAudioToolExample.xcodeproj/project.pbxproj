@@ -14,6 +14,7 @@
 		58BB3F1C2243B3D700C12F34 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BB3F1B2243B3D700C12F34 /* AudioToolbox.framework */; };
 		58BB3F1E2243B3E300C12F34 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BB3F1D2243B3E300C12F34 /* CoreFoundation.framework */; };
 		58BB3F202243B3E900C12F34 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BB3F1F2243B3E900C12F34 /* OpenAL.framework */; };
+		58C00C7723E88D8F006FE9E4 /* AudioPlayerWindows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58C00C7523E88D8F006FE9E4 /* AudioPlayerWindows.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		58BB3F1B2243B3D700C12F34 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		58BB3F1D2243B3E300C12F34 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		58BB3F1F2243B3E900C12F34 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		58C00C7523E88D8F006FE9E4 /* AudioPlayerWindows.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPlayerWindows.cpp; sourceTree = "<group>"; };
+		58C00C7623E88D8F006FE9E4 /* AudioPlayerWindows.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AudioPlayerWindows.hpp; sourceTree = "<group>"; };
 		58FBDADC2306BF03009B5504 /* MattsAudioTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MattsAudioTools.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +70,8 @@
 				584EE0D52264AB4A00C841C9 /* WavCodec.hpp */,
 				584EE0D42264AB4A00C841C9 /* AudioPlayerOsX.hpp */,
 				584EE0D62264AB4A00C841C9 /* AudioPlayerOsX.cpp */,
+				58C00C7523E88D8F006FE9E4 /* AudioPlayerWindows.cpp */,
+				58C00C7623E88D8F006FE9E4 /* AudioPlayerWindows.hpp */,
 			);
 			name = src;
 			path = ../../src;
@@ -165,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58C00C7723E88D8F006FE9E4 /* AudioPlayerWindows.cpp in Sources */,
 				584EE0DB2264AB4B00C841C9 /* AudioPlayerOsX.cpp in Sources */,
 				584EE0DA2264AB4B00C841C9 /* WavCodec.cpp in Sources */,
 				584EE0D92264AB4B00C841C9 /* AudioPlayerOpenAL.cpp in Sources */,

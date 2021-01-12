@@ -7,7 +7,9 @@
 //
 #ifndef WavCodec_hpp // WavCodec WavCodec
 #include "WavCodec.hpp"
-
+#if defined _WIN32 || defined _WIN64
+#define fopen fopen_s
+#endif
 //==============================================================================
 WavCodec::~WavCodec(){}
 //==============================================================================
@@ -16,9 +18,9 @@ int WavCodec::getSampleRate(){return wavReadFileSampRate;};
 void WavCodec::printWavHeader(const char *filename)
 {
     FILE *f;
-    waveFormatHeader hdr;
-    f = fopen(filename, "rb");
-
+    waveFormatHeader hdr;    
+    openFile(f, filename, "rb");
+    
     if (!f)
     {
         printf("NO FILE FOUND\n");
@@ -26,7 +28,7 @@ void WavCodec::printWavHeader(const char *filename)
     else
     {
         fread(&hdr, 1, sizeof(hdr), f);
-
+        
         printf("--- .WAV HEADER --- \n\n");
         printf("Chunk ID        : %.4s\n", hdr.chunkID);
         printf("Chunk Size      : %u\n", hdr.chunkSize);
@@ -56,7 +58,7 @@ void WavCodec::writeWavSS(float **audioData, const char outputFile[], int number
 {
     normaliseStereoBuffer(audioData[0], audioData[1] ,numberOfFrames);
     FILE * file;
-    file = fopen(outputFile, "w");
+    openFile(file, outputFile, "w");
     if (!file)
     {
         printf("Could not open file to write: check file path\n");
@@ -69,7 +71,7 @@ void WavCodec::writeWavSS(float **audioData, const char outputFile[], int number
         int16_t sdata;
         //	const float amp = 32000.0;
         const float amp = 32767.0; // absolute peak value of 16-bit PCM
-
+        
         for(int i = 0; i < numberOfFrames; ++i)
         {
             sdata = (int16_t)(audioData[0][i]*amp);
@@ -80,13 +82,13 @@ void WavCodec::writeWavSS(float **audioData, const char outputFile[], int number
         printf("%d samples written to %s\n", numberOfFrames*2,outputFile);
     }
     fclose(file);
-
+    
 }
 
 //==============================================================================
 bool WavCodec::checkHeader(waveFormatHeader fileHeader)
 {
-
+    
     if ((strncmp(&fileHeader.chunkID[0], "RIFF", 4))	 ||
         (strncmp(&fileHeader.format[0],  "WAVE", 4))     ||
         (strncmp(&fileHeader.subChunk1ID[0], "fmt ", 4)) ||
@@ -104,23 +106,23 @@ bool WavCodec::checkHeader(waveFormatHeader fileHeader)
 float* WavCodec::readWav(const char *filename, int *sampsPerChan, int *sampleRate)
 {
     FILE *f;
-    f = fopen(filename, "rb");
+    openFile(f, filename, "rb");
     if (!f){return NULL;}
     fread(&wavReadFileHeader, 1, sizeof(wavReadFileHeader), f);
-
+    
     if(!checkHeader(wavReadFileHeader))
     {
         fclose(f);
         printf("NOT A WAV FILE\n");
         return NULL;
     }
-
+    
     const int totalSamples = wavReadFileHeader.subChunk2Size * 8 /(wavReadFileHeader.bitsPerSample);
     *sampsPerChan = totalSamples / (wavReadFileHeader.numChannels);
     printf("Length: %d\tSamples: %d \n",totalSamples,*sampsPerChan);
-
+    
     float *data = new float[*sampsPerChan];
-
+    
     parseWavMonoFile(data, f);
     fclose(f);
     printf("%d samples read from %s\n",*sampsPerChan,filename);
@@ -137,7 +139,7 @@ bool WavCodec::parseWavMonoFile(float* data, FILE *f)
     const float wav8BitScale = 2/pow(2,wavReadFileHeader.bitsPerSample);
     const int numberOfFrames = wavReadFileHeader.subChunk2Size * 8 /(wavReadFileHeader.bitsPerSample * wavReadFileHeader.numChannels);
     const int byteOffset = (4-byteNum);
-
+    
     for (int sample = 0; sample < numberOfFrames; ++sample)
     {
         for (int channel = 0; channel < wavReadFileHeader.numChannels; ++channel)
@@ -169,7 +171,7 @@ bool WavCodec::parseWavMonoFile(float* data, FILE *f)
             }
         }
     }
-
+    
     delete[] buf;
     return true;
 }
@@ -183,7 +185,7 @@ bool WavCodec::parseWavFile(float** data, FILE *f)
     const float wav8BitScale = 2/pow(2,wavReadFileHeader.bitsPerSample);
     const int numberOfFrames = wavReadFileHeader.subChunk2Size * 8 /(wavReadFileHeader.bitsPerSample * wavReadFileHeader.numChannels);
     const int byteOffset = (4-byteNum);
-
+    
     for (int sample = 0; sample < numberOfFrames; ++sample)
     {
         for (int channel = 0; channel < wavReadFileHeader.numChannels; ++channel)
@@ -202,7 +204,7 @@ bool WavCodec::parseWavFile(float** data, FILE *f)
                     {
                         data_in_channel |= (buf[k] << (k+byteOffset)*8);
                     }
-
+                    
                     data[channel][sample] = ((float)data_in_channel) * wavBitScale;
                 }
             }
@@ -222,28 +224,28 @@ bool WavCodec::parseWavFile(float** data, FILE *f)
 float** WavCodec::readStereoWav(const char *filename, int *sampsPerChan, int *sampleRate)
 {
     FILE *f;
-    f = fopen(filename, "rb");
+    openFile(f, filename, "rb");
     if (!f)
     {
         return NULL;
     }
-
+    
     fread(&wavReadFileHeader, sizeof(wavReadFileHeader), 1 , f);
-
+    
     if(!checkHeader(wavReadFileHeader))
     {
         fclose(f);
         printf("NOT A WAV FILE\n");
         return NULL;
     }
-
+    
     if ((wavReadFileHeader.numChannels != 2))
     {
         fclose(f);
         printf("NOT A STEREO FILE\n");
         return NULL;
     }
-
+    
     const int totalSamples = wavReadFileHeader.subChunk2Size * 8 /(wavReadFileHeader.bitsPerSample);
     *sampsPerChan	 = totalSamples/(wavReadFileHeader.numChannels);
     float** data = new float*[wavReadFileHeader.numChannels];
@@ -251,12 +253,12 @@ float** WavCodec::readStereoWav(const char *filename, int *sampsPerChan, int *sa
     {
         return NULL;
     }
-
+    
     for(int i = 0; i < wavReadFileHeader.numChannels; ++i)
     {
         data[i] = new float[*sampsPerChan];
     }
-
+    
     parseWavFile(data, f);
     fclose(f);
     printf("%d samples read from %s\n",totalSamples,filename);
@@ -322,12 +324,12 @@ void WavCodec::normaliseBuffer(float *audioData, int numberOfFrames)
 {
     float temp;
     float maxy = 0.0; // Find max abs sample
-
+    
     for(int n = 0; n < numberOfFrames; ++n)
     {
         if(fabs(audioData[n])>maxy) maxy = fabs(audioData[n]);
     }
-
+    
     // Normalise
     if(maxy > 0.00001)
     {
@@ -337,7 +339,7 @@ void WavCodec::normaliseBuffer(float *audioData, int numberOfFrames)
             audioData[n] = temp/maxy;
         }
     }
-
+    
     // Smooth last 500 samples
     if(numberOfFrames > 501)
     {
@@ -350,7 +352,7 @@ void WavCodec::normaliseBuffer(float *audioData, int numberOfFrames)
                 ramp -= inc;
         }
     }
-
+    
     printf("Normalised by : %.5f\n", maxy);
 }
 
@@ -360,14 +362,14 @@ void WavCodec::normaliseStereoBuffer(float *audioL, float *audioR, int numberOfF
 {
     float temp;
     float maxy = 0.0; // Find max abs sample
-
+    
     for(int n = 0; n < numberOfFrames; ++n)
     {
         if(fabs(audioL[n])>maxy) maxy = fabs(audioL[n]);
         if(fabs(audioR[n])>maxy) maxy = fabs(audioR[n]);
-
+        
     }
-
+    
     // Normalise
     if(maxy > 0.00001)
     {
@@ -379,7 +381,7 @@ void WavCodec::normaliseStereoBuffer(float *audioL, float *audioR, int numberOfF
             audioR[n] = temp/maxy;
         }
     }
-
+    
     // Smooth last 500 samples
     if(numberOfFrames>501)
     {
@@ -392,7 +394,7 @@ void WavCodec::normaliseStereoBuffer(float *audioL, float *audioR, int numberOfF
             if(ramp>0) ramp-=inc;
         }
     }
-
+    
     printf("Normalised by : %.5f\n", maxy);
 }
 //==============================================================================
@@ -405,9 +407,9 @@ size_t WavCodec::writeWaveHeaderToFile(FILE * file)
 void WavCodec::writeWavMS(float* audio,const char outputFile[], int numberOfFrames, float sampleRate)
 {
     normaliseBuffer(audio ,numberOfFrames);
-
+    
     FILE * file;
-    file = fopen(outputFile, "w");
+    openFile(file, outputFile, "w");
     if (!file)
     {
         printf("Could not open file to write: check file path\n");
@@ -419,7 +421,7 @@ void WavCodec::writeWavMS(float* audio,const char outputFile[], int numberOfFram
         writeWaveHeaderToFile(file);
         int16_t sdata;
         const float amp = 32000.0;
-
+        
         for(int i=0;i<numberOfFrames;++i)
         {
             sdata = (int16_t)(audio[i]*amp);  //set sdata to PCM 16-bit
@@ -436,12 +438,12 @@ float** WavCodec::whiteNoise(int sampsPerChan, int sampleRate)
     const float lo = -1.;
     const float hi =  1.;
     float** data = new float*[2];
-
+    
     for(int i = 0; i < 2; ++i)
     {
         data[i] = new float[sampsPerChan];
     }
-
+    
     for(int i = 0; i < sampsPerChan; ++i)
     {
         data[0][i] = lo + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(hi-lo)));
@@ -452,31 +454,32 @@ float** WavCodec::whiteNoise(int sampsPerChan, int sampleRate)
 //==============================================================================
 char* WavCodec::readRawData(const char *filename, int *dataSize, int *sampleRate)
 {
-    FILE *f = fopen(filename, "rb");
+    FILE *f;
+    openFile(f, filename, "rb");
     if (!f)
     {
         return nullptr;
     }
-
+    
     fread(&wavReadFileHeader, 1, sizeof(wavReadFileHeader), f);
-
+    
     if(!checkHeader(wavReadFileHeader))
     {
         fclose(f);
         printf("NOT A WAV FILE\n");
         return nullptr;
     }
-
+    
     const int totalSamples = wavReadFileHeader.subChunk2Size * 8 /(wavReadFileHeader.bitsPerSample);
     *dataSize = wavReadFileHeader.subChunk2Size;
     printf("Number of Sample Size: %d\tData: %d KB \n",totalSamples, *dataSize/1000);
     char *data = new char[*dataSize];
-
+    
     for (int sample = 0; sample < *dataSize; ++sample)
     {
         size_t readCheck = fread(&data[sample], 1, 1, f);
     }
-
+    
     fclose(f);
     *sampleRate = wavReadFileHeader.sampleRate;
     return data;
@@ -494,6 +497,16 @@ uint16_t WavCodec::getFileChannelNumber()
 uint16_t WavCodec::getFileBitDepth()
 {
     return wavReadFileHeader.bitsPerSample;
+}
+
+bool WavCodec::openFile(FILE *f, const char *filename, const char *mode)
+{
+#if defined _WIN32 || defined _WIN64
+    fopen_s(file, outputFile, mode);
+#else
+    f = fopen(filename, mode);
+#endif
+    return (f) ? true : false;
 }
 
 #endif /* AudioWavFileReader_hpp */
