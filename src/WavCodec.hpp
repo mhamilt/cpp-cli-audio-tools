@@ -279,7 +279,7 @@ private: // Methods
       @param f pointer to FILE
       @return true on success, false on failure
     */
-    static bool openFile(FILE *f, const char *filename, const char *mode);
+    static bool openFile(FILE **f, const char *filename, const char *mode);
     
     
 private: // Variables

@@ -18,8 +18,9 @@ int WavCodec::getSampleRate(){return wavReadFileSampRate;};
 void WavCodec::printWavHeader(const char *filename)
 {
     FILE *f;
-    waveFormatHeader hdr;    
-    openFile(f, filename, "rb");
+    waveFormatHeader hdr;
+    
+    openFile(&f, filename, "rb");
     
     if (!f)
     {
@@ -58,7 +59,7 @@ void WavCodec::writeWavSS(float **audioData, const char outputFile[], int number
 {
     normaliseStereoBuffer(audioData[0], audioData[1] ,numberOfFrames);
     FILE * file;
-    openFile(file, outputFile, "w");
+    openFile(&file, outputFile, "w");
     if (!file)
     {
         printf("Could not open file to write: check file path\n");
@@ -106,7 +107,7 @@ bool WavCodec::checkHeader(waveFormatHeader fileHeader)
 float* WavCodec::readWav(const char *filename, int *sampsPerChan, int *sampleRate)
 {
     FILE *f;
-    openFile(f, filename, "rb");
+    openFile(&f, filename, "rb");
     if (!f){return NULL;}
     fread(&wavReadFileHeader, 1, sizeof(wavReadFileHeader), f);
     
@@ -224,7 +225,7 @@ bool WavCodec::parseWavFile(float** data, FILE *f)
 float** WavCodec::readStereoWav(const char *filename, int *sampsPerChan, int *sampleRate)
 {
     FILE *f;
-    openFile(f, filename, "rb");
+    openFile(&f, filename, "rb");
     if (!f)
     {
         return NULL;
@@ -409,7 +410,7 @@ void WavCodec::writeWavMS(float* audio,const char outputFile[], int numberOfFram
     normaliseBuffer(audio ,numberOfFrames);
     
     FILE * file;
-    openFile(file, outputFile, "w");
+    openFile(&file, outputFile, "w");
     if (!file)
     {
         printf("Could not open file to write: check file path\n");
@@ -455,7 +456,7 @@ float** WavCodec::whiteNoise(int sampsPerChan, int sampleRate)
 char* WavCodec::readRawData(const char *filename, int *dataSize, int *sampleRate)
 {
     FILE *f;
-    openFile(f, filename, "rb");
+    openFile(&f, filename, "rb");
     if (!f)
     {
         return nullptr;
@@ -499,12 +500,12 @@ uint16_t WavCodec::getFileBitDepth()
     return wavReadFileHeader.bitsPerSample;
 }
 
-bool WavCodec::openFile(FILE *f, const char *filename, const char *mode)
+bool WavCodec::openFile(FILE** f, const char *filename, const char *mode)
 {
 #if defined _WIN32 || defined _WIN64
     fopen_s(file, outputFile, mode);
 #else
-    f = fopen(filename, mode);
+    *f = fopen(filename, mode);
 #endif
     return (f) ? true : false;
 }
