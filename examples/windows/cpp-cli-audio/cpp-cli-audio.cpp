@@ -8,7 +8,7 @@ int main ()
     AudioPlayerWindows ap = AudioPlayerWindows();
     std::cout << "Sample Rate: " << ap.getSystemSampleRate() << '\n';
 
-    float durationSeconds = 20.0;
+    float durationSeconds = 2.0;
     float sampleRate = ap.getSystemSampleRate ();
     unsigned long durationSamples = ap.getSystemSampleRate () * durationSeconds;
     float* sineWave = new float[durationSamples];
