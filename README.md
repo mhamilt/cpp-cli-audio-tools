@@ -76,7 +76,7 @@ Now press <kbd>F7</kbd> to build
 
 ![](gifs/XcodeCli.gif)
 
-- **Add OpenAL framework to target**
+- **Add OpenAL, CoreFoundation and AudioToolbox frameworks to target**
 
 ![](gifs/XcodeAddOpenAL.gif)
 
