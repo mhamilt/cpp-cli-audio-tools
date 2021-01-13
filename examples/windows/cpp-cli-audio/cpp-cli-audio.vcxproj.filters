@@ -21,9 +21,15 @@
     <ClCompile Include="..\..\..\src\AudioPlayerWindows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\WavCodec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\AudioPlayerWindows.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\WavCodec.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

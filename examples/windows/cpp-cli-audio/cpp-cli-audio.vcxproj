@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\AudioPlayerWindows.cpp" />
+    <ClCompile Include="..\..\..\src\WavCodec.cpp" />
     <ClCompile Include="cpp-cli-audio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\AudioPlayerWindows.hpp" />
+    <ClInclude Include="..\..\..\src\WavCodec.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

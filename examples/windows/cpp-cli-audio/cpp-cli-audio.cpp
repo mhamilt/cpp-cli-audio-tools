@@ -5,7 +5,7 @@
 
 int main ()
 {
-    AudioPlayerWindows ap = AudioPlayerWindows();
+    AudioPlayerWindows ap;
     std::cout << "Sample Rate: " << ap.getSystemSampleRate() << '\n';
 
     float durationSeconds = 2.0;

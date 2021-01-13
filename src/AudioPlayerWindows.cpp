@@ -12,7 +12,7 @@
 AudioPlayerWindows::AudioPlayerWindows ()
 {
     HRESULT hr = CoInitialize (nullptr);
-    if ( FAILED (hr) ) 
+    if ( FAILED (hr) )
     {
         exit;
     }
@@ -27,17 +27,17 @@ AudioPlayerWindows::AudioPlayerWindows ()
         eRender, eConsole, &pDevice);
 
     printDebugMessage ("Activate");
-    hr = pDevice->Activate (IID_IAudioClient, 
+    hr = pDevice->Activate (IID_IAudioClient,
                             CLSCTX_ALL,
-                            NULL, 
+                            NULL,
                             (void**) &pAudioClient);
 
     printDebugMessage ("GetMixFormat");
     hr = pAudioClient->GetMixFormat (&pwfx);
-    
+
     printDebugMessage ("SetFormat");
     hr = SetFormat (pwfx); // Tell the audio source which format to use.
-    
+
 }
 
 AudioPlayerWindows::~AudioPlayerWindows ()
@@ -48,14 +48,67 @@ AudioPlayerWindows::~AudioPlayerWindows ()
 HRESULT AudioPlayerWindows::PlayAudioStream ()
 {
     printDebugMessage ("Initialize");
-    hr = pAudioClient->Initialize (
-        AUDCLNT_SHAREMODE_SHARED,
-        0,
-        hnsRequestedDuration,
-        0,
-        pwfx,
-        NULL);
-     EXIT_ON_ERROR (hr);
+    hr = pAudioClient->Initialize (AUDCLNT_SHAREMODE_SHARED,
+                                   0,
+                                   hnsRequestedDuration,
+                                   0,
+                                   pwfx,
+                                   NULL);
+        
+    
+    switch ( hr )
+    {
+        case AUDCLNT_E_ALREADY_INITIALIZED:
+            std::cout << "AUDCLNT_E_ALREADY_INITIALIZED" << '\n';
+            break;
+        case AUDCLNT_E_WRONG_ENDPOINT_TYPE:
+            std::cout << "AUDCLNT_E_WRONG_ENDPOINT_TYPE" << '\n';
+            break;
+        case AUDCLNT_E_BUFFER_SIZE_NOT_ALIGNED:
+            std::cout << "AUDCLNT_E_BUFFER_SIZE_NOT_ALIGNED" << '\n';
+            break;
+        case AUDCLNT_E_BUFFER_SIZE_ERROR:
+            std::cout << "AUDCLNT_E_BUFFER_SIZE_ERROR" << '\n';
+            break;
+        case AUDCLNT_E_CPUUSAGE_EXCEEDED:
+            std::cout << "AUDCLNT_E_CPUUSAGE_EXCEEDED" << '\n';
+            break;
+        case AUDCLNT_E_DEVICE_INVALIDATED:
+            std::cout << "AUDCLNT_E_DEVICE_INVALIDATED" << '\n';
+            break;
+        case AUDCLNT_E_DEVICE_IN_USE:
+            std::cout << "AUDCLNT_E_DEVICE_IN_USE" << '\n';
+            break;
+        case AUDCLNT_E_ENDPOINT_CREATE_FAILED:
+            std::cout << "AUDCLNT_E_ENDPOINT_CREATE_FAILED" << '\n';
+            break;
+        case AUDCLNT_E_INVALID_DEVICE_PERIOD:
+            std::cout << "AUDCLNT_E_INVALID_DEVICE_PERIOD" << '\n';
+            break;
+        case AUDCLNT_E_UNSUPPORTED_FORMAT:
+            std::cout << "AUDCLNT_E_UNSUPPORTED_FORMAT" << '\n';
+            break;
+        case AUDCLNT_E_EXCLUSIVE_MODE_NOT_ALLOWED:
+            std::cout << "AUDCLNT_E_EXCLUSIVE_MODE_NOT_ALLOWED" << '\n';
+            break;
+        case AUDCLNT_E_BUFDURATION_PERIOD_NOT_EQUAL:
+            std::cout << "AUDCLNT_E_BUFDURATION_PERIOD_NOT_EQUAL" << '\n';
+            break;
+        case AUDCLNT_E_SERVICE_NOT_RUNNING:
+            std::cout << "AUDCLNT_E_SERVICE_NOT_RUNNING" << '\n';
+            break;
+        case E_POINTER:
+            std::cout << "E_POINTER" << '\n';
+            break;
+        case E_INVALIDARG:
+            std::cout << "E_INVALIDARG" << '\n';
+            break;
+        case E_OUTOFMEMORY:
+            std::cout << "E_INVALIDARG" << '\n';
+            break;
+    }
+        
+    EXIT_ON_ERROR (hr);
 
     // Get the actual size of the allocated buffer.
     printDebugMessage ("GetBufferSize");
@@ -64,9 +117,8 @@ HRESULT AudioPlayerWindows::PlayAudioStream ()
 
     printDebugMessage ("GetService");
 
-    hr = pAudioClient->GetService (
-        IID_IAudioRenderClient,
-        (void**) &pRenderClient);
+    hr = pAudioClient->GetService (IID_IAudioRenderClient,
+                                   (void**) &pRenderClient);
     EXIT_ON_ERROR (hr);
 
     // Grab the entire buffer for the initial fill operation.
@@ -141,8 +193,8 @@ HRESULT AudioPlayerWindows::SetFormat (WAVEFORMATEX* wfex)
         format.Samples.wValidBitsPerSample = format.Format.wBitsPerSample;
         format.dwChannelMask = 0;
     }
-    
-    if(VERBOSE)
+
+    if ( VERBOSE )
     {
         const UINT16 formatTag = EXTRACT_WAVEFORMATEX_ID (&format.SubFormat);
         std::cout << "Channel Count: " << format.Format.nChannels << '\n';
@@ -204,7 +256,7 @@ void AudioPlayerWindows::initAudio (float* audioInData, unsigned int numSamples)
 }
 
 void AudioPlayerWindows::reset ()
-{    
+{
     audioDataBufferPos = 0;
 }
 
@@ -220,7 +272,7 @@ HRESULT AudioPlayerWindows::playAudioData (float* audioInData, unsigned long num
     initialised = false;
     initAudio (audioInData, numSamples);
 
-    PlayAudioStream();
+    PlayAudioStream ();
 }
 
 float AudioPlayerWindows::getSystemSampleRate ()
