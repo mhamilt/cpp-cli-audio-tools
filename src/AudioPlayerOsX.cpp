@@ -1,6 +1,6 @@
 #ifdef __APPLE__
 #include "TargetConditionals.h"
-#ifdef TARGET_OS_MAC
+#if defined(TARGET_OS_MAC) && defined(AUDIO_TOOLBOX_VERSION)
 //==============================================================================
 #ifndef OSX_AUDIOPLAYER_H
 #define checkStatus(status) checkStatus_(status, __FILE__, __LINE__)
@@ -326,3 +326,4 @@ void AudioPlayerOsX::playFile(const char *fn)
 #endif
 #endif
 #endif
+
