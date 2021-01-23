@@ -503,7 +503,7 @@ uint16_t WavCodec::getFileBitDepth()
 bool WavCodec::openFile(FILE** f, const char *filename, const char *mode)
 {
 #if defined _WIN32 || defined _WIN64
-    fopen_s(file, outputFile, mode);
+    fopen_s(f, filename, mode);
 #else
     *f = fopen(filename, mode);
 #endif
