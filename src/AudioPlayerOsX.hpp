@@ -1,6 +1,6 @@
 #ifdef __APPLE__
 #include "TargetConditionals.h"
-#ifdef TARGET_OS_MAC
+#if defined(TARGET_OS_MAC) && defined(AUDIO_TOOLBOX_VERSION)
 
 #ifndef OSX_AUDIOPLAYER_H
 #define OSX_AUDIOPLAYER_H
